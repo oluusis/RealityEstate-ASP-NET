@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealityEstate.Models;
 using RealityEstate.Models.Database.Services;
+using RealityEstate.Models.Entities;
 using System.Diagnostics;
 
 namespace RealityEstate.Controllers
@@ -37,18 +38,19 @@ namespace RealityEstate.Controllers
 
         public IActionResult Category(int id)
         {
-            return RedirectToAction("Index","Catalog", new { sort = "category", value = id });
+            return RedirectToAction("Index", "Catalog", new Filter { IDCategory = id });
         }
+
+        public IActionResult Region()
+        {
+            return RedirectToAction("Index", "Catalog", new Filter { Region = Request.Form["RegionName"] });
+        }
+
+
 
         public IActionResult Price()
         {
             this.ViewBag.ShowedOffers = this.offerService.Offerlist.OrderByDescending(x => x.Price);
-            return RedirectToAction("Index", new { showAll = false });
-        }
-
-        public IActionResult Region(string name)
-        {
-            this.ViewBag.ShowedOffers = this.offerService.Offerlist.Where(x => x.Name == name);
             return RedirectToAction("Index", new { showAll = false });
         }
 

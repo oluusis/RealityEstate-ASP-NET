@@ -6,5 +6,12 @@
         {
             <vc:offer-component offer="@ViewBag.ShowedOffers[i]"></vc:offer-component>
         }
+
+        @if(ViewBag.ShowedOffers.Count == 0)
+        {
+           <div class="alert alert-danger" role="alert">
+                Podle vašeho filtru nebyla nalezena žádná nabídka.
+           </div>
+        }
     </div>
 </div>

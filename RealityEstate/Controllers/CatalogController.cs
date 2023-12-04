@@ -6,36 +6,55 @@ namespace RealityEstate.Controllers
 {
     public class CatalogController : Controller
     {
-        private OfferService offerService;
-        private CategoryService categoryService;    
+        private OfferService offerService;   
 
         public CatalogController()
         {
             this.offerService = OfferService.Instance;
-            this.categoryService = CategoryService.Instance;
-
         }
-        public IActionResult Index(string sort = "", object? value = null)
+
+
+        public IActionResult Index(Filter filter)
         {
             List<Offer> offers = new List<Offer>();
-            offers = GetOffers(sort, value);
+            offers = GetFilteredOffers(filter);
+            this.ViewBag.ShowNumber = filter.ListingStart;
 
             this.ViewBag.ShowedOffers = offers;
             return View();
         }
 
-       public List<Offer> GetOffers(string sort, object? value)
+
+       public List<Offer> GetFilteredOffers(Filter filter)
        {
-            switch (sort)
+            List<Offer> list = this.offerService.Offerlist.ToList();
+
+            if (filter.Size != null)
             {
-                case "category":
-                        return this.categoryService.CategoryList.First(x => x.ID == (int)value).Offers.ToList();
-
-
-                default:
-                    return this.offerService.Offerlist.ToList();
+                list = list.Where(x => x.Size == filter.Size).ToList();
             }
 
+            if (filter.Type != null)
+            {
+                list = list.Where(x => x.Type == filter.Type).ToList();
+            }
+
+            if (filter.Region != null)
+            {
+                list = list.Where(x => x.Address == filter.Region).ToList();
+            }
+
+            if (filter.IDCategory != null)
+            {
+                list = list.Where(x => x.IDCategory == filter.IDCategory).ToList();
+            }
+            
+            if(filter.MaxPrice != null && filter.MinPrice != null)
+            {
+                list = list.Where(x => x.Price >= filter.MinPrice && x.Price <= filter.MaxPrice).ToList();
+            }
+            
+            return list;
        }
     }
 }
