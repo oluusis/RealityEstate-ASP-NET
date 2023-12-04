@@ -1,0 +1,107 @@
+﻿    @using RealityEstate.Models.Entities;
+    @using System.ComponentModel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<main>
+    <div class="search">
+        <H1>Vyberte si svůj nový byt</H1>
+        <form asction="search">
+            <div class="search-input">
+                <input type="text" placeholder="Vyhledávání podle města...">
+                <button class="search-button" type="submit">HLEDAT</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="content">
+        <div class="main-content-flattypes">
+            @foreach (Category item in ViewBag.Categories)
+            {
+                <div>
+                    <a asp-controller="Home" asp-action="Category" asp-route-id="@item.ID">
+                        <h3>@item.Name</h3>
+                        <p>@item.Offers.Count nabídek</p>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <div>
+            <div>
+                <h1>Naše nabídka</h1>
+            </div>
+
+            <div class="under-line">
+                <div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="offer">
+            @for (int i = this.ViewBag.ShowNumber; i < this.ViewBag.ShowNumber +3 && i < this.ViewBag.ShowedOffers.Count; i++)
+            {
+                <vc:offer-component offer="@ViewBag.ShowedOffers[i]"></vc:offer-component>
+            }
+        </div>
+
+        <div class="findAll">
+            @if (ViewBag.ShowNumber < this.ViewBag.ShowedOffers.Count-1)
+            {
+                <a asp-action="Index" asp-route-number="@Math.Min(ViewBag.ShowNumber+3,this.ViewBag.ShowedOffers.Count-1)">
+                    <button class="search-button">Next</button>
+                </a>
+            }
+
+
+            @if (ViewBag.ShowNumber > 0)
+            {
+                <a asp-action="Index" asp-route-number="0">
+                    <button class="search-button">Start</button>
+                </a>
+
+                <a asp-action="Index" asp-route-number="@Math.Max(0, @ViewBag.ShowNumber-3)">
+                    <button class="search-button">Back</button>
+                </a>
+            }  
+        </div>
+
+        <a class="findAll" asp-controller="Catalog" asp-action="Index">
+            <button class="search-button">Zobrazit vše</button>
+        </a>
+       
+
+        <div>
+            <h1>Zkušenosti zákazníků</h1>
+
+            <div class="under-line">
+                <div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="employee">
+            <div>
+                <img src="podklady/user-lisa-evans-80x80.jpg">
+                <div>
+                    <p>Thank you for your prompt response and the help that you gave me. You always have a quick solution to any problem. What an excellent level of customer service!</p>
+                    <h6>Lisa Evans</h6>
+                </div>
+            </div>
+
+            <div>
+                <img src="podklady/user-nicholas-lane-80x80.jpg">
+                <div>
+                    <p>I just want to thank you for your help. I was so pleased and grateful. Keep up the excellent work. Your site provides the best support I have ever encountered.</p>
+                    <h6>Nicholas Lane</h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>

@@ -1,0 +1,78 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using RealityEstate.Models;
+using RealityEstate.Models.Database.Services;
+using System.Diagnostics;
+
+namespace RealityEstate.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+        private OfferService offerService;
+        private CategoryService categoryService;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+            this.offerService = OfferService.Instance;
+            this.categoryService = new CategoryService();
+        }
+
+        public IActionResult Index(bool showAll = true, int number = 0) //, BindingList<Offer>? offers = null)
+        {
+            this.ViewBag.Categories = this.categoryService.CategoryList;
+            this.ViewBag.ShowNumber =  number;
+
+            if (showAll)
+            {
+                this.ViewBag.ShowedOffers = this.offerService.Offerlist;
+            }
+            //else
+            //{
+            //    this.ViewBag.ShowedOffers = offers;
+            //}
+          
+            return View();
+        }
+
+        public IActionResult Category(int id)
+        {
+            return RedirectToAction("Index","Catalog", new { sort = "category", value = id });
+        }
+
+        public IActionResult Price()
+        {
+            this.ViewBag.ShowedOffers = this.offerService.Offerlist.OrderByDescending(x => x.Price);
+            return RedirectToAction("Index", new { showAll = false });
+        }
+
+        public IActionResult Region(string name)
+        {
+            this.ViewBag.ShowedOffers = this.offerService.Offerlist.Where(x => x.Name == name);
+            return RedirectToAction("Index", new { showAll = false });
+        }
+
+        public IActionResult Type(string type)
+        {
+            this.ViewBag.ShowedOffers = this.offerService.Offerlist.Where(x => x.Type == type);
+            return RedirectToAction("Index", new { showAll = false });
+        }
+
+        public IActionResult Size(int size)
+        {
+            this.ViewBag.ShowedOffers = this.offerService.Offerlist.Where(x => x.Size == size);
+            return RedirectToAction("Index", new { showAll = false });
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}

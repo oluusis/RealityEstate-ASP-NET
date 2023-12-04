@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RealityEstate</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.mingg.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+
+</head>
+<body>
+    <header>
+        <div class="header-row">
+            <div class="icon">
+                <img src="/podklady\icon1.png" alt="">
+                <p><a href="mailto:info@realintense.org">info@realintense.org</a></p>
+            </div>
+
+            <div class="icon">
+                <img src="/podklady\icon2.png" alt="">
+                <p><a href="tel:+420 777 666 777">+420 777 666 777</a></p>
+            </div>
+        </div>
+
+        <hr>
+        <div class="header-row header-mobile">
+            <div id="logo">
+                <img src="/podklady\logo-dark.png">
+            </div>
+
+            <div class="header-sources">
+                <h4><a asp-controller="Home" asp-action="Index">HOME</a></h4>
+                <h4><a href="xxx">KONTAKT</a></h4>
+                <h4><a asp-controller="Catalog" asp-action="Index" >KATALOG</a></h4>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div>
+            <div>
+                <h3>NEWSLETTER</h3>
+                <p>Keep up with the latest company news and events. Enter your e-mail and subscribe to our newsletter.</p>
+                <form action="getmail">
+                    <div class="search-input">
+                        <input type="email" placeholder="Zadejte svůj email...">
+                        <button class="search-button" type="submit">Odeslat</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div id="Uqueries">
+                <h3>UŽITEČNÉ DOTAZY </h3>
+                <ul>
+                    <li><a href="">Byty na pronájem</a></li>
+                    <li><a href="">Byty prodej</a></li>
+                    <li><a href="">Pronájem</a> </li>
+                    <li><a href="">prodej</a> </li>
+                </ul>
+
+            </div>
+
+            <div class="news">
+                <h3>NOVINKY</h3>
+                <p><span>14. 5. 2016 </span> Lorem Ipsum je demonstrativní výplňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti už od začátku 16. stoletíňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti už od začátku 16. století</p>
+                <p><span>14. 5. 2016 </span> Ipsum je demonstrativní výplňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti už od začátku 16. stoletíňový text používaný v tiskařském a knihařském průmyslu. Lorem Ipsum je považováno za standard v této oblasti už od začátku 16. století</p>
+            </div>
+        </div>
+
+        <p>Copyright 2016 - Real estate</p>
+    </footer>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>*@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

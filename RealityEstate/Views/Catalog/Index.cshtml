@@ -1,0 +1,10 @@
+﻿
+<div class="content">
+    <div class="offer">
+
+        @for (int i = 0; i < @ViewBag.ShowedOffers.Count; i++)
+        {
+            <vc:offer-component offer="@ViewBag.ShowedOffers[i]"></vc:offer-component>
+        }
+    </div>
+</div>
