@@ -37,13 +37,13 @@
 
     <div class="info">
       <div>
-        <h2>@Model.Name</h2>
-        <p class="no-pc">@Model.Address</p>
+        <h2>@Model.Name, @Model.Size</h2>
+        <p class="no-pc">@Model.GetFullAddress</p>
         <h1>@Model.Price,- / měsíc</h1>
       </div>
 
       <div class="under-info">
-        <p class="no-mobile">@Model.Address</p>
+        <p class="no-mobile">@Model.GetFullAddress</p>
         <p>za nemovitost</p>
       </div>
 
@@ -99,7 +99,7 @@
                 @if (ViewBag.Attributes.Count % 2 != 0)
                 {
                     <th>
-                        <div>X</div>
+                        <div class="transparent">X</div>
                         <div></div>
                     </th>
                 }
@@ -147,24 +147,8 @@
       </div>
       
     
-
       <div>
-        <h2>Napište nám, ozveme se</h2>
-        <form action="messageRequest">
-          <div class="fullwidth">
-            <input type="text" placeholder="Vaše jméno a příjmení">
-          </div>
-          <div id="middle-form">
-            <input type="tel" placeholder="Telefon">
-            <input type="email" placeholder="E-mail">
-          </div>
-          <div class="fullwidth">
-            <textarea value="message" name="" id="" cols="30" rows="10" placeholder="Napište nám zprávu..."></textarea>
-          </div>
-          <div class="button-center">
-            <button class="search-button" type="submit">Odeslat poptávku</button>
-          </div>
-        </form>
+        <vc:demand-component demand="@ViewBag.Demand"></vc:demand-component>
       </div>
     </div>   
       

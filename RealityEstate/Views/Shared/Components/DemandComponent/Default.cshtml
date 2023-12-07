@@ -1,0 +1,33 @@
+﻿@using RealityEstate.Models.Entities;
+
+@model Demand;
+
+<h2>Napište nám, ozveme se</h2>
+<form class="messageRequest" asp-controller="Detail" asp-action="Index" method="post">
+          <div class="fullwidth">
+            <input asp-for="Name" placeholder="Vaše jméno a příjmení">
+          </div>
+          <span asp-validation-for="Name" class="xinvalid-feedback"></span>
+          <div id="middle-form">
+              <div>
+                  <input asp-for="Tel" placeholder="Telefon">
+                  <span asp-validation-for="Tel" class="xinvalid-feedback"></span>
+              </div>
+            
+              <div>
+                    <input asp-for="Email" placeholder="E-mail">
+                    <span asp-validation-for="Email" class="xinvalid-feedback"></span>
+              </div> 
+          </div>
+          <div class="fullwidth">
+            <textarea asp-for="Message" cols="30" rows="10" placeholder="Napište nám zprávu..."></textarea>          
+          </div>
+          <span asp-validation-for="Message" class="xinvalid-feedback"></span>
+
+          <div class="button-center">
+            <button class="search-button" type="submit">Odeslat poptávku</button>
+          </div>     
+
+          <input type="hidden" asp-for="IDOffer" />
+          <input type="hidden" asp-for="IDUser" />
+</form>    

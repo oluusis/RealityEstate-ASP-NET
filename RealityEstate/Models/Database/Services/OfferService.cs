@@ -48,6 +48,12 @@
             return new BindingList<Offer>(this.Context.Offers.ToList());
         }
 
+        public void AddDemand(Demand demand)
+        {
+            this.Context.Demands.Add(demand);
+            this.Context.SaveChanges();
+        }
+
         //public List<Offer> GetAll(int idCategory)
         //{
         //    return  this.Offerlist.Where(x => x.IDCategory == idCategory).ToList();

@@ -573,7 +573,7 @@ div table {
         text-align: center;
     }
 
-form[action*="messageRequest"] {
+.messageRequest {
     margin-bottom: 5vh;
 }
 
@@ -585,7 +585,7 @@ form[action*="messageRequest"] {
     display: flex;
 }
 
-form[action*="messageRequest"] div *:not(button) {
+.messageRequest div *:not(button) {
     margin-bottom: 2vh;
     padding: 1vh;
 }
@@ -735,4 +735,8 @@ textarea {
     .main-info {
         margin: 1vh 5% 1vh 5%;
     }
+}
+
+.transparent{
+    opacity: 0;
 }

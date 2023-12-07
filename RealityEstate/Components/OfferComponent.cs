@@ -9,7 +9,5 @@ namespace RealityEstate.Components
         {
             return View(offer);
         }
-
-
     }
 }

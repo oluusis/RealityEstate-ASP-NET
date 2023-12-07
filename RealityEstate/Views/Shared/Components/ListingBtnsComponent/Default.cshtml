@@ -1,0 +1,24 @@
+﻿
+
+
+<div class="findAll">
+
+     @if (this.ViewBag.ShowNumber < this.ViewBag.ShowedOffersCount-1)
+            {
+                <a asp-action="Index" asp-route-number="@Math.Min(ViewBag.ShowNumber+3,this.ViewBag.ShowedOffers.Count-1)">
+                    <button class="search-button">Next</button>
+                </a>
+            }
+
+
+            @if (ViewBag.ShowNumber > 0)
+            {
+                <a asp-action="Index" asp-route-number="0">
+                    <button class="search-button">Start</button>
+                </a>
+
+                <a asp-action="Index" asp-route-number="@Math.Max(0, @ViewBag.ShowNumber-3)">
+                    <button class="search-button">Back</button>
+                </a>
+            }            
+</div>

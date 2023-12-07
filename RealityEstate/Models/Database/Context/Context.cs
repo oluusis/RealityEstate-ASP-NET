@@ -20,7 +20,7 @@ namespace RealityEstate.Models.Database.Context
         public DbSet<AdminSeller> AdminSellers { get; set; }
         public DbSet<User> Users { get; set; }
 
-        private static Context instance = null;
+        private static Context instance;
         public static Context Instance
         {
             get

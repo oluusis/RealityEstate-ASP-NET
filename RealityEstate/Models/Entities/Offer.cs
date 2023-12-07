@@ -24,7 +24,15 @@ namespace RealityEstate.Models.Entities
 
         public int Size { get; set; }   
 
+        public string Region { get; set; }
+
         public string Address { get; set; }
+
+        public string GetFullAddress {
+            get
+            {
+                return this.Region + ", " + this.Address;
+            }}  
 
         public char EnergeticClass { get; set; }
 
