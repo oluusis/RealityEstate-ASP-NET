@@ -1,0 +1,214 @@
+using RealityEstate.Controllers.Attributes;
+using Microsoft.AspNetCore.Mvc;
+using RealityEstate.Models.Database.Services;
+using RealityEstate.Models.Entities;
+using RealityEstate.Models.Rights;
+
+namespace RealityEstate.Controllers
+{
+    public class DetailController : Controller
+    {
+        private OfferService offerService = OfferService.Instance;
+
+        [HttpGet]
+        //[Authorize]
+        public IActionResult Index(int id, Demand? demand)
+        {
+            this.ViewBag.Attributes = offerService.Context.Attributes.ToList();
+
+            this.ViewBag.Demand = demand.IDOffer == 0 ? new Demand() { IDOffer = id } : demand; // vypnít id usera
+
+
+            Offer offer = this.offerService.Offerlist.FirstOrDefault(x => x.ID == id);
+
+            if(offer != null)
+            {
+                return View(offer);
+            }
+
+            return RedirectToAction("Index","Home");
+        }
+
+        [HttpPost]
+        public IActionResult Index(Demand demand)
+        {
+            if (this.ModelState.IsValid)
+            {
+                offerService.AddDemand(demand);
+                return RedirectToAction("Confirm");
+            }
+
+            return RedirectToAction("Index", new { id = demand.IDOffer, demand = demand });
+        }
+
+        public IActionResult Confirm()
+        {
+            return View();
+        }
+    }
+}
+
+---------------------------------------------------------
+@using RealityEstate.Models.Entities;
+@model Offer;
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+
+<main>
+  <div class="main-info">
+  
+      @if(Model.Images.Count != 0)
+        {
+            <img src="@Model.Images[0].Path">
+
+             <div class="images">
+
+                @for (int i = 1; i < Model.Images.Count; i++)
+                {
+                    <a class="images-items" href="">
+                        <img  src="@Model.Images[i].Path">
+                    </a>
+                }
+      
+                 <div id="lastImg" class="images-items">
+                    <h3>Dalších 23</h3>
+                    <h3>fotek</h3>
+                </div>
+      
+            </div>
+        }
+        else
+        {
+             <img src="/podklady/noimage.jpg">
+        }
+        
+
+    <div class="info">
+      <div>
+        <h2>@Model.Name, @Model.Size</h2>
+        <p class="no-pc">@Model.GetFullAddress</p>
+        <h1>@Model.Price,- / měsíc</h1>
+      </div>
+
+      <div class="under-info">
+        <p class="no-mobile">@Model.GetFullAddress</p>
+        <p>za nemovitost</p>
+      </div>
+
+      <div>
+        <div id="greenLabel">
+          <p>Energetická třída</p>
+          <h3>@Model.EnergeticClass</h3>
+        </div>
+
+
+        <div id="calculator">
+          <img src="/podklady\icon.png">
+          <p>spočítat hypotéku</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text">
+      <p>
+        @Model.BigInfo
+        </div>
+      </p>
+    </div>
+
+    <div class="two-tables">
+      <table class="tb-two-stripped">
+          <tbody>
+             @for (int i = 0; i < (ViewBag.Attributes.Count/2)+1; i++)
+             {
+                <th>
+                    <div>@ViewBag.Attributes[i].Name</div>
+
+                    <div>@Model.Attributes.FirstOrDefault(x => x.IDAttribute == @ViewBag.Attributes[i].ID)?.Value</div>
+           
+                </th>     
+             }
+
+        </tbody> 
+      </table>
+
+      <table class="tb-two-stripped">
+        <tbody>
+         @for (int i = (ViewBag.Attributes.Count/2)+1; i < ViewBag.Attributes.Count; i++)
+             {
+                <th>
+                    <div>@ViewBag.Attributes[i].Name</div>
+
+                    <div>@Model.Attributes.FirstOrDefault(x => x.IDAttribute == @ViewBag.Attributes[i].ID)?.Value</div>
+           
+                </th>     
+             }
+
+                @if (ViewBag.Attributes.Count % 2 != 0)
+                {
+                    <th>
+                        <div class="transparent">X</div>
+                        <div></div>
+                    </th>
+                }
+            </tbody>
+      </table>
+    </div>
+
+    <div class="seler">
+      <div>
+        <h2>Kontaktujte prodejce</h2>
+
+        <div>
+          <div>
+            <img src="@Model.AdminSeller.ImagePath">
+          </div>
+          
+          <div>
+            <h3>@Model.AdminSeller.Title @Model.AdminSeller.GetFullName</h3>
+  
+            <div>
+              <img src="/podklady\icon-ing1.png">
+              <p>@Model.AdminSeller.Email</p>
+            </div>
+  
+            <div>
+              <img src="/podklady\icon-ing2.png">
+              <p id="telB">@Model.AdminSeller.Tel</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="prestige" class="prestige">
+          <div>
+            <img src="/podklady\icon-flex1.png">
+            <p>Makéř roku</p>
+            <p>2020</p>
+          </div>
+          <div>
+            <img src="/podklady\icon-flex2.png">
+            <p>Cena zákazníků</p>
+            <p>2021</p>
+          </div>
+        </div> 
+       
+      </div>
+      
+    
+      <div>
+        <vc:demand-component demand="@ViewBag.Demand"></vc:demand-component>
+      </div>
+    </div>   
+      
+  </div>
+</main>
+
+<div class="mapFooter">
+  <div>
+<!--    <img src="/podklady/map.png" alt="map.png">-->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2558.125049556377!2d14.485543366562672!3d50.121381938983845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470beca39416d921%3A0x864beab28e9040e1!2sLitv%C3%ADnovsk%C3%A1%20500%2F5%2C%20190%2000%20Praha%209-Prosek!5e0!3m2!1scs!2scz!4v1701332165291!5m2!1scs!2scz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>

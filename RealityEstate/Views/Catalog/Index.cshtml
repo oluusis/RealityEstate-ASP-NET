@@ -1,43 +1,64 @@
 ﻿@using RealityEstate.Models.Entities;
 @model Filter;
 
-<div class="content">
+<div class="content">   
 
-    <div class="filters">
+    <div id="filters">
+        <h1>Filter</h1>
         <form asp-action="Index">
-            <div class="search-input">
+            <div id="filter-search" class="search-input">
                 <input type="text" asp-for="Region" placeholder="Vyhledávání podle města...">
             </div>
 
             <div>
-                <label asp-for="MinPrice"></label>
-                <input  asp-for="MinPrice">
+                <div>
+                     <select asp-for="IDCategory" >
+                    <option>Select Category</option>
+                    @foreach (Category item in ViewBag.Categories)
+                    {
+                        <option value="@item.ID">@item.Name</option>
+                    }
+                    </select>
+                </div>
+               
             </div>
 
             <div>
-                  <label asp-for="MaxPrice"></label>
-                  @*<input type="range" asp-for="MaxPrice" min="0" max="@Model.MaxPriceSet"/>*@
-                  <input asp-for="MaxPrice" />
-            </div>
+                <div>
+                    <label asp-for="MinPrice"></label>
+                    <input asp-for="MinPrice" min="0">
+                </div>
 
-            <div>
-                <label>Počet pokojů</label>
-                <input asp-for="RoomCount" /> 
+                <div>
+                    <label asp-for="MaxPrice"></label>
+                    @*<input type="range" asp-for="MaxPrice" min="0" max="@Model.MaxPriceSet"/>*@
+                    <input asp-for="MaxPrice" min="0" />
+                </div>
             </div>
-
+            
             <div>
-                <label>Počet koupelen</label>
-                <input asp-for="BathCount"+/> 
+                <div>
+                    <label>Počet pokojů</label>
+                    <input @*type="range"*@ asp-for="RoomCount" /> 
+                </div>
+
+                <div>
+                    <label>Počet koupelen</label>
+                    <input @*type="range"*@ asp-for="BathCount"/> 
+                </div>
             </div>
            
-            <div>
+           <div>
+               <div>
                  <label asp-for="Size"></label>
                   <input asp-for="Size" /> 
-            </div>   
+                </div>   
 
-            <div>
-                 <button class="search-button" type="submit">HLEDAT</button>
-            </div>
+                <div>
+                    <button class="search-button" type="submit">HLEDAT</button>
+                 </div>
+           </div>
+            
         </form>
     </div>
 

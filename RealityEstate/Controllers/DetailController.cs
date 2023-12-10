@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using RealityEstate.Controllers.Attributes;
+using Microsoft.AspNetCore.Mvc;
 using RealityEstate.Models.Database.Services;
 using RealityEstate.Models.Entities;
 using RealityEstate.Models.Rights;
@@ -10,6 +11,7 @@ namespace RealityEstate.Controllers
         private OfferService offerService = OfferService.Instance;
 
         [HttpGet]
+        //[Authorize]
         public IActionResult Index(int id, Demand? demand)
         {
             this.ViewBag.Attributes = offerService.Context.Attributes.ToList();
