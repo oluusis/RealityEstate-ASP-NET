@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RealityEstate.Models.Database.Services;
 using RealityEstate.Models.Entities;
 
@@ -17,8 +18,9 @@ namespace RealityEstate.Controllers
         {
             List<Offer> offers = new List<Offer>();
             offers = GetFilteredOffers(filter);
-            this.ViewBag.ShowNumber = filter.ListingStart;
 
+            this.ViewBag.ShowNumber = filter.ListingStart;
+            this.ViewBag.Categories = offerService.Context.Categories.ToList();   
 
             this.ViewBag.ShowedOffers = offers;
             return View(filter);

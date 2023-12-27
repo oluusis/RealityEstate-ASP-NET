@@ -8,8 +8,7 @@
 
 <main>
   <div class="main-info">
-  
-      @if(Model.Images.Count != 0)
+    @if(Model.Images.Count != 0)
         {
             <img src="@Model.Images[0].Path">
 
@@ -20,13 +19,24 @@
                     <a class="images-items" href="">
                         <img  src="@Model.Images[i].Path">
                     </a>
+
+                    @if(Model.Images.Count-1 == 5)
+                    {
+                        <div id="lastImg" class="images-items" href="">
+                            <img  src="@Model.Images[i].Path">
+                            <div class="centered">
+                                <h3>Dalších @(Model.Images.Count-6)</h3>
+                                <h3>fotek</h3>
+                            </div>
+                        </div>
+                    }
                 }
-      
+                @*
                  <div id="lastImg" class="images-items">
                     <h3>Dalších 23</h3>
                     <h3>fotek</h3>
                 </div>
-      
+                *@
             </div>
         }
         else
@@ -64,34 +74,38 @@
     <div class="text">
       <p>
         @Model.BigInfo
-        </div>
+       
       </p>
     </div>
 
     <div class="two-tables">
+        
+      @if(Model.Attributes.Count != 0)
+      {
       <table class="tb-two-stripped">
           <tbody>
-             @for (int i = 0; i < (ViewBag.Attributes.Count/2)+1; i++)
+             @for (int i = 0; i < (Model.Attributes.Count/2)+1; i++)
              {
                 <th>
-                    <div>@ViewBag.Attributes[i].Name</div>
+                    <div>@Model.Attributes[i].Attribute.Name</div>
 
-                    <div>@Model.Attributes.FirstOrDefault(x => x.IDAttribute == @ViewBag.Attributes[i].ID)?.Value</div>
+                    <div>@Model.Attributes[i].Value</div>
            
                 </th>     
              }
 
-        </tbody> 
-      </table>
+           </tbody> 
+      </table>  
+      
 
-      <table class="tb-two-stripped">
+       <table class="tb-two-stripped">
         <tbody>
-         @for (int i = (ViewBag.Attributes.Count/2)+1; i < ViewBag.Attributes.Count; i++)
+         @for (int i = (Model.Attributes.Count/2)+1; i < Model.Attributes.Count; i++)
              {
                 <th>
-                    <div>@ViewBag.Attributes[i].Name</div>
+                    <div>@Model.Attributes[i].Attribute.Name</div>
 
-                    <div>@Model.Attributes.FirstOrDefault(x => x.IDAttribute == @ViewBag.Attributes[i].ID)?.Value</div>
+                    <div>@Model.Attributes[i].Value</div>
            
                 </th>     
              }
@@ -105,7 +119,9 @@
                 }
             </tbody>
       </table>
+      }
     </div>
+     
 
     <div class="seler">
       <div>
@@ -150,8 +166,8 @@
       <div>
         <vc:demand-component demand="@ViewBag.Demand"></vc:demand-component>
       </div>
-    </div>   
-      
+    </div> 
+  </div>
   </div>
 </main>
 
