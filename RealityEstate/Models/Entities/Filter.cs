@@ -4,16 +4,8 @@ namespace RealityEstate.Models.Entities
 {
     public class Filter
     {
-        public string? GetType
-        {
-            get
-            {
-                return $"{this.RoomCount}+{this.BathCount}kk";
-            }
-        }
 
-        public int? RoomCount { get; set; }
-        public int? BathCount { get; set; }
+        public string? Type { get; set; }
 
         [Range(0, int.MaxValue)]
         public int? MaxPrice { get; set; }

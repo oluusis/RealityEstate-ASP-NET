@@ -2,8 +2,9 @@
 @model Offer;
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "Detail"; 
 }
+
 
 
 <main>
@@ -47,7 +48,7 @@
 
     <div class="info">
       <div>
-        <h2>@Model.Name, @Model.Size</h2>
+        <h2>@Model.Name, @Model.Size m<sup>2</sup></h2>
         <p class="no-pc">@Model.GetFullAddress</p>
         <h1>@Model.Price,- / měsíc</h1>
       </div>
@@ -128,7 +129,7 @@
         <h2>Kontaktujte prodejce</h2>
 
         <div>
-          <div>
+          <div class="rounded-circle">
             <img src="@Model.AdminSeller.ImagePath">
           </div>
           

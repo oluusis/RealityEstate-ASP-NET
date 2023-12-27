@@ -20,18 +20,18 @@ namespace RealityEstate.Models.Database.Context
         public DbSet<AdminSeller> AdminSellers { get; set; }
         public DbSet<User> Users { get; set; }
 
-        private static Context instance;
-        public static Context Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new Context();
-                }
-                return instance;
-            }
-        }
+        //private static Context instance;
+        //public static Context Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new Context();
+        //        }
+        //        return instance;
+        //    }
+        //}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

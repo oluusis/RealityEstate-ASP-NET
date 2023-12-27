@@ -13,7 +13,7 @@
             <div>
                 <div>
                      <select asp-for="IDCategory" >
-                    <option>Select Category</option>
+                    <option value=""> --Select Category-- </option>
                     @foreach (Category item in ViewBag.Categories)
                     {
                         <option value="@item.ID">@item.Name</option>
@@ -37,15 +37,13 @@
             </div>
             
             <div>
-                <div>
-                    <label>Počet pokojů</label>
-                    <input @*type="range"*@ asp-for="RoomCount" /> 
-                </div>
-
-                <div>
-                    <label>Počet koupelen</label>
-                    <input @*type="range"*@ asp-for="BathCount"/> 
-                </div>
+                <select asp-for="Type">
+                    <option value=""> --Select type-- </option>
+                    @foreach (Offer item in ViewBag.ShowedTypes)
+                    {
+                        <option value="@item.Type">@item.Type</option>
+                    }
+                </select>
             </div>
            
            <div>

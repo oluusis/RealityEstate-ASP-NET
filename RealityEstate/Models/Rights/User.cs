@@ -21,6 +21,6 @@ namespace RealityEstate.Models.Rights
         [PasswordPropertyText]
         public string Password { get; set; }
 
-        public List<Demand> Demands { get; set; }
+        public List<Demand>? Demands { get; set; }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
+using RealityEstate.Models.Database.Services;
+using RealityEstate.Models.Rights;
 
-namespace RealityEstate.Controllers.Attributes
+namespace RealityEstate.Controllers.AuthorizingClasses
 {
     public class AuthorizeAttribute : Attribute, IActionFilter
     {
-
         //atribut který požaduje ověření
         public void OnActionExecuted(ActionExecutedContext context)
         {
@@ -15,12 +16,18 @@ namespace RealityEstate.Controllers.Attributes
         {
             Controller controllerFrom = (Controller)context.Controller;
 
-            if (controllerFrom.HttpContext.Session.GetString("login") == null)
+            if (controllerFrom.HttpContext.Session.GetString("login") != null)
             {
-                string c = controllerFrom.Request.RouteValues["controller"].ToString();
-                string a = controllerFrom.Request.RouteValues["action"].ToString();
+                RightsService service = new RightsService();
+                AdminSeller admin = service.Find(Convert.ToInt32(controllerFrom.HttpContext.Session.GetString("login")));
 
-                context.Result = new RedirectToActionResult("Index", "Login", new { c = c, a = a });
+                if (admin.Type == false)
+                {
+                    string c = controllerFrom.Request.RouteValues["controller"].ToString();
+                    string a = controllerFrom.Request.RouteValues["action"].ToString();
+
+                    context.Result = new RedirectToActionResult("Index", "Login", new { c, a });
+                }
             }
         }
     }

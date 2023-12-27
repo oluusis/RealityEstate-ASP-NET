@@ -28,9 +28,9 @@ namespace RealityEstate.Models.Entities
         [StringLength(100,MinimumLength = 4)]
         public string Email { get; set; }
 
-        public string? Message { get; set; }
+        public string Message { get; set; } = "";
 
-        public Offer Offer { get; set; }
+        public Offer? Offer { get; set; }
 
         public User? User { get; set; }
 

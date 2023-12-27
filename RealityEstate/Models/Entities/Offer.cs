@@ -40,14 +40,16 @@ namespace RealityEstate.Models.Entities
 
         public string Type { get; set; }
 
-        public Category Category { get; set; }
+        public bool Showed { get; set; }    
 
-        public AdminSeller AdminSeller { get; set; }
+        public Category? Category { get; set; }
 
-        public List<AttributeValue> Attributes { get; set; }
+        public AdminSeller? AdminSeller { get; set; }
 
-        public List<Image> Images { get; set; }
+        public List<AttributeValue>? Attributes { get; set; }
 
-        public List<Demand> Demands { get; set; }   
+        public List<Image>? Images { get; set; }
+
+        public List<Demand>? Demands { get; set; }   
     }
 }

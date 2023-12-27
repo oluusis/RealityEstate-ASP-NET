@@ -33,8 +33,19 @@
 
             <div class="header-sources">
                 <h4><a asp-controller="Home" asp-action="Index">HOME</a></h4>
-                <h4><a href="xxx">KONTAKT</a></h4>
                 <h4><a asp-controller="Catalog" asp-action="Index" >KATALOG</a></h4>
+
+                <h4>
+                @if(ViewBag.Login == null)
+                {
+                    <a asp-controller="Login" asp-action="Index" asp-route-c="Home" asp-route-a="@ViewContext.RouteData.Values["action"]">LOG IN</a>
+                }
+                else
+                {
+                    <a asp-controller="Login" asp-action="Logout" asp-route-a="@ViewContext.RouteData.Values["action"]">LOG OUT</a>
+                    <p>Hello! @ViewBag.User.Name</p>
+                }
+                </h4>
             </div>
         </div>
 

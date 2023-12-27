@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealityEstate.Models.Entities
@@ -12,11 +13,13 @@ namespace RealityEstate.Models.Entities
 
         [ForeignKey("Attribute")]
         public int IDAttribute { get; set; }
-        
+
+        [MinLength(1)]
+        [MaxLength(100)]
         public string Value { get; set; }   
 
-        public Offer Offer { get; set; }
+        public Offer? Offer { get; set; }
 
-        public Attribute Attribute { get; set; }    
+        public Attribute? Attribute { get; set; }    
     }
 }

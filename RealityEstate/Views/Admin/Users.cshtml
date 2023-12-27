@@ -1,0 +1,61 @@
+﻿@using RealityEstate.Models.Rights;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+   
+        <button class="btn btn-success">
+             <a asp-controller="Admin" asp-action="EditUser" asp-route-id="0">Create</a>
+        </button>
+  
+
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Tel.</th>
+            <th>Login name</th>
+            <th>Password</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (User item in ViewBag.Users)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Tel</td>
+                <td>@item.LoginName</td>
+                <td>@item.Password</td>
+
+                 <td>
+                     <button class="btn btn-secondary"> 
+                         <a asp-controller="Admin" asp-action="Detail" asp-route-id="@item.ID" class="btn-link-clear">Read</a>
+                     </button>
+
+                     <button class="btn btn-warning">
+                        <a asp-controller="Admin" asp-action="EditUser" asp-route-id="@item.ID" class="btn-link-clear">Edit</a>
+                     </button>
+
+                     <button class="btn btn-danger">
+                        <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Users"  class="btn-link-clear">Delete</a>
+                     </button>
+                </td>
+            </tr>
+
+            
+        }
+
+        
+    </tbody>
+</table>

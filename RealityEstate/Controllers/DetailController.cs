@@ -1,5 +1,4 @@
-﻿using RealityEstate.Controllers.Attributes;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RealityEstate.Models.Database.Services;
 using RealityEstate.Models.Entities;
 using RealityEstate.Models.Rights;
@@ -8,15 +7,14 @@ namespace RealityEstate.Controllers
 {
     public class DetailController : Controller
     {
-        private OfferService offerService = OfferService.Instance;
+        private OfferService offerService = new OfferService();
 
         [HttpGet]
-        //[Authorize]
-        public IActionResult Index(int id, Demand? demand)
+        public IActionResult Index(int id)
         {
             this.ViewBag.Attributes = offerService.Context.Attributes.ToList();
-
-            this.ViewBag.Demand = demand.IDOffer == 0 ? new Demand() { IDOffer = id } : demand; // vypnít id usera
+            this.ViewBag.Id = id;
+            this.ViewBag.Demand = new Demand() { IDOffer = id };
 
 
             Offer offer = this.offerService.Offerlist.FirstOrDefault(x => x.ID == id);
@@ -30,15 +28,20 @@ namespace RealityEstate.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Demand demand)
+        public IActionResult Index(int id, Demand demand)
         {
             if (this.ModelState.IsValid)
             {
-                offerService.AddDemand(demand);
+                this.offerService.SaveDemand(demand);
                 return RedirectToAction("Confirm");
             }
 
-            return RedirectToAction("Index", new { id = demand.IDOffer, demand = demand });
+            this.ViewBag.Attributes = offerService.Context.Attributes.ToList();
+            this.ViewBag.Id = id;
+            this.ViewBag.Demand = demand;
+            Offer offer = this.offerService.Offerlist.FirstOrDefault(x => x.ID == id);
+
+            return View(offer);
         }
 
         public IActionResult Confirm()

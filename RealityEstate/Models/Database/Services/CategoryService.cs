@@ -24,7 +24,7 @@
 
         public CategoryService()
         {
-            this.Context = Context.Instance;
+            this.Context = new Context();
             this.CategoryList = new BindingList<Category>(Context.Categories.ToList());
 
             for (int i = 0; i < CategoryList.Count; i++)

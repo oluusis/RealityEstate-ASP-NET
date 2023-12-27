@@ -1,0 +1,64 @@
+﻿@using RealityEstate.Models.Rights;
+
+
+
+@model AdminSeller;
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form asp-action="Profil"> 
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+    </div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Surname"></label>
+        <input asp-for="Surname" />
+    </div>
+
+     <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+    
+    <div>
+        <label asp-for="Tel"></label>
+        <input asp-for="Tel"/>
+    </div>
+    
+    <div>
+        <label asp-for="LoginName"></label>
+        <input asp-for="LoginName" />
+    </div>
+    
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password"/>
+    </div>
+
+    <div>
+        <label asp-for="ImagePath">Image</label>
+        <img style="max-width: 100px" src="@Model.ImagePath" alt="@Model.ImagePath">
+        <input type="hidden" asp-for="ImagePath" />
+    </div>
+
+    <input type="hidden" asp-for="Type" />
+
+    <div>
+        <button type="submit" class="btn btn-info">Ok</button>
+        <button class="btn btn-danger">
+           <a asp-controller="Admin" asp-action="Index">
+                 Cancel
+           </a>
+        </button>
+    </div>
+</form>

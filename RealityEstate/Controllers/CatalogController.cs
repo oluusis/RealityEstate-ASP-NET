@@ -11,7 +11,7 @@ namespace RealityEstate.Controllers
 
         public CatalogController()
         {
-            this.offerService = OfferService.Instance;
+            this.offerService = new OfferService();
         }
 
         public IActionResult Index(Filter filter)
@@ -23,6 +23,7 @@ namespace RealityEstate.Controllers
             this.ViewBag.Categories = offerService.Context.Categories.ToList();   
 
             this.ViewBag.ShowedOffers = offers;
+            this.ViewBag.ShowedTypes = offerService.GetAll();
             return View(filter);
         }
 
@@ -30,23 +31,17 @@ namespace RealityEstate.Controllers
 
        public List<Offer> GetFilteredOffers(Filter filter)
        {
-            List<Offer> list = this.offerService.Offerlist.ToList();
+            List<Offer> list = this.offerService.Offerlist.Where(x => x.Showed == true).ToList();
 
             if (filter.Size.GetValueOrDefault(0) != 0)
             {
                 list = list.Where(x => x.Size == filter.Size).ToList();
             }
 
-            if (filter.RoomCount.GetValueOrDefault(0) != 0)
+            if (!string.IsNullOrWhiteSpace(filter.Type))
             {
-                list = list.Where(x => x.Type.Substring(0,x.Type.IndexOf('+')) == filter.RoomCount.ToString()).ToList();
+                list = list.Where(x => x.Type == filter.Type).ToList();
             }
-
-            if (filter.BathCount.GetValueOrDefault(0) != 0)
-            {
-                list = list.Where(x => x.Type.Substring(x.Type.IndexOf('+')+1,1) == filter.BathCount.ToString()).ToList();
-            }
-
 
             if (!string.IsNullOrWhiteSpace(filter.Region))
             {

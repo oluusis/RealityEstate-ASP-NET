@@ -21,6 +21,13 @@ header, .content {
             flex: 1;
         }
 
+.rounded-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
 .header-row div:nth-child(2) {
     justify-content: right;
 }
@@ -406,6 +413,7 @@ footer > p {
 .images-items {
     flex: 1 1 auto;
     width: 1%;
+    max-width:400px;
 }
 
     .images-items img {
@@ -633,6 +641,11 @@ textarea {
     gap: 2vh;
 }
 
+#middle-form div{
+    padding-left: 0px;
+    width: 44.5%;
+}
+
     #middle-form input {
         width: 100%;
     }
@@ -667,6 +680,8 @@ textarea {
     .main-info {
         margin: 2%;
     }
+
+   
 
     .seler div:nth-child(2) {
         width: 100%;
@@ -797,8 +812,6 @@ textarea {
 
 .dropdown {
     height: 100%;
-    background-color: green;
-    
 }
 
 .unvisible {

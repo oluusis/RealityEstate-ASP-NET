@@ -8,11 +8,6 @@ namespace RealityEstate.Models.Rights
         public int ID { get; set; }
 
         public string ImagePath { get; set; }
-
-        /// <summary>
-        /// ///////jinej nazev
-        /// </summary>
-
         
         public bool Type { get; set; }
      

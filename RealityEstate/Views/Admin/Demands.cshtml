@@ -1,0 +1,82 @@
+﻿@using RealityEstate.Models.Entities;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+        <button class="btn btn-success">
+             <a asp-controller="Admin" asp-action="EditDemand" asp-route-id="0">Create</a>
+        </button>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Tel.</th>
+            <th>Message</th>
+            <th>Offer name</th>
+            <th>User name</th>
+            <th>Actions</th>
+        </tr>
+       
+    </thead>
+
+
+    <tbody>
+        @foreach (Demand item in ViewBag.Demands)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Tel</td>
+
+                @if(@item.Message.Length > 20){
+                    <td>@item.Message.Substring(0,19)...</td>
+                }
+                else{
+                    <td>@item.Message</td>
+                }
+                
+                @if(item.Offer != null)
+                {
+                    <td>@item.Offer.Name</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+                
+                @if(item.User != null)
+                {
+                    <td>@item.User.Name</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+
+                  <td>
+                     <button class="btn btn-secondary"> 
+                         <a asp-action="Detail" asp-route-id="@item.ID" >Read</a>
+                     </button>
+
+                     <button class="btn btn-warning">
+                        <a asp-action="EditDemand" asp-route-id="@item.ID" >Edit</a>
+                     </button>
+
+                     <button class="btn btn-danger">
+                        <a asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Demands">Delete</a>
+                     </button>
+                </td>
+            </tr>
+
+            
+        }
+
+        
+    </tbody>
+</table>

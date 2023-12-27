@@ -1,0 +1,35 @@
+﻿@using RealityEstate.Models.Entities;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model AttributeValue;
+
+<h3>@ViewBag.NameAttribute</h3>
+
+<form asp-controller="Admin" asp-action="EditAttributeValue">
+
+          <div>
+              <label>Value</label>
+              <input asp-for="Value" />
+              <span asp-validation-for="Value" class="xinvalid-feedback"></span>
+          </div>
+        
+          
+          <input type="hidden" asp-for="IDOffer" />
+           <input type="hidden" asp-for="IDAttribute" />
+
+           <input type="hidden" asp-for="Offer" />
+           <input type="hidden" asp-for="Attribute" />
+
+
+            <div>
+                <button type="submit" class="btn btn-info">Ok</button>
+                <button class="btn btn-danger">
+                    <a asp-controller="Admin" asp-action="AttributeValues" asp-route-idOffer="@Model.IDOffer">
+                          Cancel
+                    </a>
+                  
+                </button>
+            </div>
+</form>  
