@@ -56,6 +56,7 @@ namespace RealityEstate.Controllers
             if(a != "")
             {
                 this.HttpContext.Session.Remove("loginUsr");
+                this.HttpContext.Session.Remove("login");
                 return RedirectToAction(a, "Home");
             }
 

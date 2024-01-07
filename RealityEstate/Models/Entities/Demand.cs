@@ -30,9 +30,11 @@ namespace RealityEstate.Models.Entities
 
         public string Message { get; set; } = "";
 
+        public User? User { get; set; }
+
         public Offer? Offer { get; set; }
 
-        public User? User { get; set; }
+        
 
     }
 }

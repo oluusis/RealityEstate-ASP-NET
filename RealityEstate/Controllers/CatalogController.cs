@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using RealityEstate.Controllers.AuthorizingClasses;
 using RealityEstate.Models.Database.Services;
 using RealityEstate.Models.Entities;
 
 namespace RealityEstate.Controllers
 {
-    public class CatalogController : Controller
+    public class CatalogController : BaseController
     {
         private OfferService offerService;   
 

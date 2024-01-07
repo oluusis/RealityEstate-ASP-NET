@@ -19,6 +19,19 @@
                 <p><a href="mailto:info@realintense.org">info@realintense.org</a></p>
             </div>
 
+            @if(ViewBag.Login != null)
+            {
+                @if(this.ViewBag.Admin == null)
+                {
+                    <h3>Hello user @ViewBag.User.Name!</h3>
+                }
+                else
+                {
+                    <h3>Hello admin @ViewBag.Admin.Name!</h3>
+                }
+                  
+            }
+
             <div class="icon">
                 <img src="/podklady\icon2.png" alt="">
                 <p><a href="tel:+420 777 666 777">+420 777 666 777</a></p>
@@ -42,8 +55,7 @@
                 }
                 else
                 {
-                    <a asp-controller="Login" asp-action="Logout" asp-route-a="@ViewContext.RouteData.Values["action"]">LOG OUT</a>
-                    <p>Hello! @ViewBag.User.Name</p>
+                    <a asp-controller="Login" asp-action="Logout" asp-route-a="@ViewContext.RouteData.Values["action"]">LOG OUT</a>             
                 }
                 </h4>
             </div>

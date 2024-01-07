@@ -5,17 +5,43 @@
 <h2>Napište nám, ozveme se</h2>
 <form class="messageRequest" asp-controller="Detail" asp-action="Index" method="post">
           <div class="fullwidth">
-            <input asp-for="Name" placeholder="Vaše jméno a příjmení">
+                @if (ViewBag.User != null)
+                {
+                     <input asp-for="Name" placeholder="Vaše jméno a příjmení" value="@ViewBag.User.Name">
+                }
+                else
+                {
+                    <input asp-for="Name" placeholder="Vaše jméno a příjmení">
+                }
+       
           </div>
           <span asp-validation-for="Name" class="xinvalid-feedback"></span>
+
           <div id="middle-form">
               <div>
-                  <input asp-for="Tel" placeholder="Telefon">
-                  <span asp-validation-for="Tel" class="xinvalid-feedback"></span>
+                  
+                    @if (ViewBag.User != null)
+                    {
+                        <input asp-for="Tel" placeholder="Telefon" value="@ViewBag.User.Tel">
+                    }
+                    else
+                    {
+                        <input asp-for="Tel" placeholder="Telefon">
+                    }
+                    <span asp-validation-for="Tel" class="xinvalid-feedback"></span>
+          
               </div>
             
               <div>
-                    <input asp-for="Email" placeholder="E-mail">
+                    @if (ViewBag.User != null)
+                    {
+                         <input asp-for="Email" placeholder="E-mail" value="@ViewBag.User.Email">
+                    }
+                    else
+                    {
+                        <input asp-for="Email" placeholder="E-mail">
+                    }
+           
                     <span asp-validation-for="Email" class="xinvalid-feedback"></span>
               </div> 
           </div>
@@ -29,5 +55,15 @@
           </div>     
 
           <input type="hidden" asp-for="IDOffer" />
-          <input type="hidden" asp-for="IDUser" />
+
+          @if(ViewBag.User != null){
+            <input type="hidden" asp-for="IDUser" value="@ViewBag.User.ID"/>
+            @*<input type="hidden" asp-for="User" value="@ViewBag.User"/>*@
+          }
+          else
+          {
+            <input type="hidden" asp-for="IDUser" />
+          }
+          <input type="hidden" asp-for="ID" value="0" />
+    
 </form>    

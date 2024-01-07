@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealityEstate.Controllers.AuthorizingClasses;
 using RealityEstate.Models.Database.Services;
 using RealityEstate.Models.Entities;
 using RealityEstate.Models.Rights;
 
 namespace RealityEstate.Controllers
 {
-    public class DetailController : Controller
+    public class DetailController : BaseController
     {
         private OfferService offerService = new OfferService();
 
@@ -28,25 +29,20 @@ namespace RealityEstate.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(int id, Demand demand)
+        public IActionResult Index(Demand demand)
         {
             if (this.ModelState.IsValid)
             {
                 this.offerService.SaveDemand(demand);
-                return RedirectToAction("Confirm");
+                demand = new Demand() { IDOffer = demand.IDOffer };
+                this.ViewBag.ShowAlert = true;
             }
 
             this.ViewBag.Attributes = offerService.Context.Attributes.ToList();
-            this.ViewBag.Id = id;
             this.ViewBag.Demand = demand;
-            Offer offer = this.offerService.Offerlist.FirstOrDefault(x => x.ID == id);
+            Offer offer = this.offerService.Offerlist.FirstOrDefault(x => x.ID == demand.IDOffer);
 
             return View(offer);
-        }
-
-        public IActionResult Confirm()
-        {
-            return View();
         }
     }
 }

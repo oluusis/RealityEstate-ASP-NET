@@ -23,7 +23,7 @@ namespace RealityEstate.Controllers.AuthorizingClasses
                 this.ViewBag.Login = true;
                 int usrID = Convert.ToInt32(this.HttpContext.Session.GetString("loginUsr"));
                 this.ViewBag.User = this.rightsService.Users.First(x => x.ID == usrID);
-                return;
+               // return;
             }
 
             if (this.HttpContext.Session.GetString("login") != null)

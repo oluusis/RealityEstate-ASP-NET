@@ -20,3 +20,11 @@ table {
     border-radius: 50%;
     overflow: hidden;
 }
+
+
+form > div{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /*Tohle nefunguje idk whyyy*/
+}

@@ -58,9 +58,14 @@ h4 {
     align-items: center;
 }
 
-    .icon img {
-        height: 40px;
+
+    .icon:nth-child(3) {
+        justify-content: right;
     }
+
+.icon img {
+    height: 40px;
+}
 
 
 .search {

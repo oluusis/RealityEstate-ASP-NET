@@ -8,6 +8,13 @@
 
 
 <main>
+    @if (ViewBag.ShowAlert != null && ViewBag.ShowAlert)
+    {
+    <script type='text/javascript'>
+        alert('Demand sent!');
+    </script>
+    }
+
   <div class="main-info">
     @if(Model.Images.Count != 0)
         {
@@ -165,7 +172,7 @@
       
     
       <div>
-        <vc:demand-component demand="@ViewBag.Demand"></vc:demand-component>
+        <vc:demand-component demand="@ViewBag.Demand" user="@ViewBag.User"></vc:demand-component>
       </div>
     </div> 
   </div>

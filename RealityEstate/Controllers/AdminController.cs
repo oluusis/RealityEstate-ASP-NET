@@ -4,6 +4,7 @@ using RealityEstate.Controllers.AuthorizingClass;
 using RealityEstate.Models.Database.Services;
 using RealityEstate.Models.Entities;
 using RealityEstate.Models.Rights;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace RealityEstate.Controllers
 {
@@ -11,11 +12,18 @@ namespace RealityEstate.Controllers
     {
         private RightsService rightsService { get; set; }
         private OfferService offerService { get; set; }
+        private ImageService imgService { get; set; }
 
-        public AdminController()
+
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public AdminController(IWebHostEnvironment webHostEnvironment)
         {
             this.rightsService = new RightsService();
             this.offerService = new OfferService();
+            this.imgService = new ImageService();   
+
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -263,6 +271,39 @@ namespace RealityEstate.Controllers
                 return RedirectToAction("AttributeValues", new {idOffer = attributeValue.IDOffer});
             }
             return View(attributeValue);
+        }
+
+
+        public async Task<IActionResult> UploadImage(IFormFile formfile, string filename)
+        {
+            string message = string.Empty;
+
+            try
+            {
+                string wwwrootPath = _webHostEnvironment.WebRootPath;
+
+                string filePath = Path.Combine(wwwrootPath, "podklady") + filename + ".png";
+
+                if (!System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                    this.imgService.Delete(filePath);
+
+                }
+                using (FileStream stream = System.IO.File.Create(filePath))
+                {
+                    await formfile.CopyToAsync(stream);
+                    this.imgService.Add(filePath);
+                    message = "Ok";
+                }
+
+            }   
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+
+            return Ok(message);
         }
 
 
