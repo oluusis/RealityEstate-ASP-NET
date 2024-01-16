@@ -1,6 +1,6 @@
 
 table {
-    overflow-x: scroll;
+    /*overflow-x: scroll;*/
     width: 100%;
     border-collapse: collapse;
 }
@@ -28,3 +28,63 @@ form > div{
     width: 100%;
     /*Tohle nefunguje idk whyyy*/
 }
+
+
+.forms > div{
+    display: block;
+    
+}
+
+/*neosos*/
+.forms {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+    .forms label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .forms input,
+    .forms textarea,
+    .forms select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .forms textarea {
+        resize: vertical;
+    }
+
+    .forms .formfile {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .forms button {
+        padding: 10px 20px;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .forms .btn-info {
+        background-color: #5bc0de;
+        color: #fff;
+        border: 1px solid #46b8da;
+    }
+
+    .forms .btn-success {
+        background-color: #5cb85c;
+        color: #fff;
+        border: 1px solid #4cae4c;
+    }
+
+    .forms .btn-danger {
+        background-color: #d9534f;
+        color: #fff;
+        border: 1px solid #d43f3a;
+    }

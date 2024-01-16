@@ -50,6 +50,9 @@ namespace RealityEstate.Models.Entities
 
         public List<Image>? Images { get; set; }
 
-        public List<Demand>? Demands { get; set; }   
+        public List<Demand>? Demands { get; set; }
+
+        [NotMapped]
+        public List<IFormFile>? Image { get; set; }
     }
 }

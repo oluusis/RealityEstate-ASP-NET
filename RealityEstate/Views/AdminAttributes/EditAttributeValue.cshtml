@@ -7,7 +7,7 @@
 
 <h3>@ViewBag.NameAttribute</h3>
 
-<form asp-controller="Admin" asp-action="EditAttributeValue">
+<form asp-controller="AdminAttributes" asp-action="EditAttributeValue">
 
           <div>
               <label>Value</label>
@@ -26,7 +26,7 @@
             <div>
                 <button type="submit" class="btn btn-info">Ok</button>
                 <button class="btn btn-danger">
-                    <a asp-controller="Admin" asp-action="AttributeValues" asp-route-idOffer="@Model.IDOffer">
+                    <a asp-controller="AdminAttributes" asp-action="AttributeValues" asp-route-idOffer="@Model.IDOffer">
                           Cancel
                     </a>
                   

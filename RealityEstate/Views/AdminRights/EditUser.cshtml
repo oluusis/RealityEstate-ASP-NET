@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form asp-action="EditUser"> 
+<form asp-action="EditUser" class="forms"> 
     <div>
         <label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -35,7 +35,7 @@
     <div>
         <button type="submit" class="btn btn-info">Ok</button>
         <button class="btn btn-danger">
-           <a asp-controller="Admin" asp-action="Users">
+           <a asp-controller="AdminRights" asp-action="Users">
                  Cancel
            </a>
         </button>

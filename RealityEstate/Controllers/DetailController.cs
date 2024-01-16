@@ -15,8 +15,7 @@ namespace RealityEstate.Controllers
         {
             this.ViewBag.Attributes = offerService.Context.Attributes.ToList();
             this.ViewBag.Id = id;
-            this.ViewBag.Demand = new Demand() { IDOffer = id };
-
+            this.ViewBag.Demand = new Demand() { IDOffer = id, IDUser = Convert.ToInt32(this.HttpContext.Session.GetString("loginUsr")) };
 
             Offer offer = this.offerService.Offerlist.FirstOrDefault(x => x.ID == id);
 
@@ -36,6 +35,7 @@ namespace RealityEstate.Controllers
                 this.offerService.SaveDemand(demand);
                 demand = new Demand() { IDOffer = demand.IDOffer };
                 this.ViewBag.ShowAlert = true;
+                return RedirectToAction("Index");
             }
 
             this.ViewBag.Attributes = offerService.Context.Attributes.ToList();

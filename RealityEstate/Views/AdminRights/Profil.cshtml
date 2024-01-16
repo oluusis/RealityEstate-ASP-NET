@@ -9,7 +9,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form asp-action="Profil"> 
+<form asp-action="Profil" enctype="multipart/form-data" class="forms">
     <div>
         <label asp-for="Title"></label>
         <input asp-for="Title" />
@@ -49,6 +49,10 @@
         <label asp-for="ImagePath">Image</label>
         <img style="max-width: 100px" src="@Model.ImagePath" alt="@Model.ImagePath">
         <input type="hidden" asp-for="ImagePath" />
+         <div>
+            <label asp-for="Image">Upload Image:</label>
+            <input asp-for="Image" name="Image" class="formfile" />
+        </div>
     </div>
 
     <input type="hidden" asp-for="Type" />

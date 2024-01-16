@@ -68,7 +68,7 @@
                 @if (ViewBag.Admin.Type == true)
                 {
                      <li class="nav-item">
-                        <a class="nav-link text-white" asp-controller="Admin" asp-action="Users">
+                        <a class="nav-link text-white" asp-controller="AdminRights" asp-action="Users">
     
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
@@ -106,7 +106,7 @@
                 @if (ViewBag.Admin.Type == true)
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-white " asp-controller="Admin" asp-action="Attributes">
+                        <a class="nav-link text-white " asp-controller="AdminAttributes" asp-action="Attributes">
     
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">view_in_ar</i>
@@ -123,7 +123,7 @@
     </li>
   
 <li class="nav-item">
-  <a class="nav-link text-white " asp-controller="Admin" asp-action="Profil" asp-route-id="@ViewBag.Admin.ID">
+  <a class="nav-link text-white " asp-controller="AdminRights" asp-action="Profil" asp-route-id="@ViewBag.Admin.ID">
     
       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
         <i class="material-icons opacity-10">person</i>

@@ -15,15 +15,11 @@ namespace RealityEstate.Controllers
         private ImageService imgService { get; set; }
 
 
-        private readonly IWebHostEnvironment _webHostEnvironment;
-
         public AdminController(IWebHostEnvironment webHostEnvironment)
         {
             this.rightsService = new RightsService();
             this.offerService = new OfferService();
-            this.imgService = new ImageService();   
-
-            _webHostEnvironment = webHostEnvironment;
+            this.imgService = new ImageService(webHostEnvironment);
         }
 
         public IActionResult Index()
@@ -31,13 +27,7 @@ namespace RealityEstate.Controllers
             return View();
         }
 
-        [Authorize]
-        public IActionResult Users()
-        {
-            this.ViewBag.Users = this.rightsService.Users;
-
-            return View();
-        }
+      
 
         public IActionResult Demands()
         {
@@ -59,28 +49,8 @@ namespace RealityEstate.Controllers
             return View();
         }
 
-        public IActionResult AttributeValues(int idOffer = 0)
-        {
-            
-            if (idOffer == 0)
-            {
-                return RedirectToAction("Index");
-            }
-            this.ViewBag.Attributes = offerService.Context.Attributes.ToList();
-            this.ViewBag.IDOffer = idOffer;
-            this.ViewBag.OfferName = this.offerService.Offerlist.First(x => x.ID == idOffer).Name;
 
-            return this.View(this.offerService.Context.AttributesValues.ToList().Where(x => x.IDOffer == idOffer).ToList());
-        }
-
-        [Authorize]
-        public IActionResult Attributes()
-        {
-            this.ViewBag.Attributes = this.offerService.GetAttributes();
-            return View();
-        }
-
-        public IActionResult Delete(int id, string a, int idOffer)
+        public IActionResult Delete(int id, string a, string c, int idOffer)
         {
             switch (a)
             {
@@ -102,38 +72,14 @@ namespace RealityEstate.Controllers
 
                 case "AttributeValues":
                     this.offerService.RemoveAttributeValue(id);
-                    return RedirectToAction("AttributeValues", new { idOffer = idOffer}); 
+                    return RedirectToAction("AttributeValues",c, new { idOffer = idOffer}); 
 
                 default:
-                    return RedirectToAction(a);
+                    return RedirectToAction(a, c);
             }
             this.offerService.Context.SaveChanges();
 
-            return RedirectToAction(a);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult EditUser(int id = 0)
-        {
-            if (id == 0)
-            {
-                return this.View(new User());
-            }
-
-            return this.View(rightsService.Users.First(x => x.ID == id));
-        }
-
-        [Authorize]
-        [HttpPost]
-        public IActionResult EditUser(User user)
-        {
-            if (this.ModelState.IsValid)
-            {
-                this.rightsService.SaveUser(user);
-                return RedirectToAction("Users");
-            }
-            return View(user);
+            return RedirectToAction(a, c);
         }
 
 
@@ -194,6 +140,12 @@ namespace RealityEstate.Controllers
             if (this.ModelState.IsValid)
             {
                 this.offerService.SaveOffer(offer);
+
+                if (offer.Image != null)
+                {
+                    this.imgService.UploadImage(offer.Image, offer.ID);
+                }
+
                 return RedirectToAction("Offers");
             }
             return View(offer);
@@ -206,106 +158,6 @@ namespace RealityEstate.Controllers
             return View();
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult EditAttribute(int id = 0)
-        { 
-            if (id == 0)
-            {
-                return this.View(new Models.Entities.Attribute());
-            }
-            return this.View(this.offerService.GetAttributes().First(x => x.ID == id));
-        }
-
-        [Authorize]
-        [HttpPost]
-        public IActionResult EditAttribute(Models.Entities.Attribute attribute)
-        {
-            if (this.ModelState.IsValid)
-            {
-                this.offerService.SaveAttribute(attribute);
-                return RedirectToAction("Attributes");
-            }
-            return View(attribute);
-        }
-
-        [HttpGet]
-        public IActionResult Profil(int id)
-        {
-            return View(this.rightsService.Find(id));
-        }
-
-        [HttpPost]
-        public IActionResult Profil(AdminSeller admin)
-        {
-            if (this.ModelState.IsValid)
-            {
-                this.rightsService.UpdateAdmin(admin);
-                return RedirectToAction("Index");
-            }
-            return View(admin);
-        }
-
-
-
-        [HttpGet]
-        public IActionResult EditAttributeValue(int id = 0, int idOffer = 0, int idAttribute = 0)
-        {
-            this.ViewBag.NameAttribute = this.offerService.GetAttributes().First(x => x.ID == idAttribute).Name;
-
-            if (id == 0)
-            {
-                return this.View(new AttributeValue() { IDOffer = idOffer , IDAttribute = idAttribute});
-            }
-            return this.View(this.offerService.Context.AttributesValues.First(x => x.ID == id));
-        }
-
-        [HttpPost]
-        public IActionResult EditAttributeValue(AttributeValue attributeValue)
-        {
-            this.ViewBag.NameAttribute = this.offerService.GetAttributes().First(x => x.ID == attributeValue.IDAttribute).Name;
-
-            if (this.ModelState.IsValid)
-            {
-                this.offerService.SaveAttributeValue(attributeValue);
-                return RedirectToAction("AttributeValues", new {idOffer = attributeValue.IDOffer});
-            }
-            return View(attributeValue);
-        }
-
-
-        public async Task<IActionResult> UploadImage(IFormFile formfile, string filename)
-        {
-            string message = string.Empty;
-
-            try
-            {
-                string wwwrootPath = _webHostEnvironment.WebRootPath;
-
-                string filePath = Path.Combine(wwwrootPath, "podklady") + filename + ".png";
-
-                if (!System.IO.File.Exists(filePath))
-                {
-                    System.IO.File.Delete(filePath);
-                    this.imgService.Delete(filePath);
-
-                }
-                using (FileStream stream = System.IO.File.Create(filePath))
-                {
-                    await formfile.CopyToAsync(stream);
-                    this.imgService.Add(filePath);
-                    message = "Ok";
-                }
-
-            }   
-            catch (Exception ex)
-            {
-                message = ex.Message;
-            }
-
-            return Ok(message);
-        }
-
-
+     
     }
 }

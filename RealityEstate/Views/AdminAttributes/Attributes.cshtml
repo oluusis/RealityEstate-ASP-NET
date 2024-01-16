@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
       <button class="btn btn-success">
-             <a asp-controller="Admin" asp-action="EditAttribute" asp-route-id="0">Create</a>
+             <a asp-controller="AdminAttributes" asp-action="EditAttribute" asp-route-id="0">Create</a>
       </button>
 
       <table class="table table-striped">
@@ -25,11 +25,11 @@
                     <td>@item.Name</td>
                     <td>
                       <button class="btn btn-warning">
-                        <a asp-action="EditAttribute" asp-route-id="@item.ID" class="btn-link-clear">Edit</a>
+                        <a asp-controller="AdminAttributes" asp-action="EditAttribute" asp-route-id="@item.ID" class="btn-link-clear">Edit</a>
                      </button>
 
                      <button class="btn btn-danger">
-                        <a asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Attributes" class="btn-link-clear">Delete</a>
+                        <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Attributes" asp-route-c="AdminAttributes" class="btn-link-clear">Delete</a>
                      </button>
                      
                     </td>

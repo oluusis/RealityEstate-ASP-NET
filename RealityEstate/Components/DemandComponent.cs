@@ -6,14 +6,8 @@ namespace RealityEstate.Components
 {
     public class DemandComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(Demand demand, User? user)
+        public IViewComponentResult Invoke(Demand demand)
         {
-
-            if(user != null)
-            {
-                this.ViewBag.User = user;   
-            }
-
             return View(demand);
         }
     }

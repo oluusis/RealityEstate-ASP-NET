@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form asp-controller="Admin" asp-action="EditOffer">
+<form asp-controller="Admin" asp-action="EditOffer" enctype="multipart/form-data" class="forms">
 
     <div>
         <label asp-for="Name"></label>
@@ -69,7 +69,7 @@
 
 
     <button class="btn btn-info">
-        <a asp-controller="Admin" asp-action="AttributeValues" asp-route-idOffer="@Model.ID">
+        <a asp-controller="AdminAttributes" asp-action="AttributeValues" asp-route-idOffer="@Model.ID">
             Attributes
         </a>
     </button>
@@ -84,15 +84,18 @@
         <option value=""> - </option>
     </select>
 
-
-  <div id="fileInputsContainer">
+    <div id="fileInputsContainer"> 
         <div>
-            <label for="formfile">Upload Image:</label>
-            <input type="file" name="formfile" class="formfile">
+            <label asp-for="Image">Upload Image:</label>
+            <input asp-for="Image" name="Image" multiple class="formfile" />
         </div>
-    </div>
+   </div>
+
+
 
     <button type="button" id="addImageButton" class="btn btn-success">Add Image</button>
+
+       <br />
 
     <div>
         <button type="submit" class="btn btn-info">Ok</button>

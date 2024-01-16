@@ -26,7 +26,7 @@
                 @if(Model.Count == 0){
                     <td>
                                 <button class="btn btn-success" >
-                            <a asp-controller="Admin" asp-action="EditAttributeValue" asp-route-id="0" asp-route-idOffer="@ViewBag.IDOffer" asp-route-idAttribute="@ViewBag.Attributes[i].ID">
+                            <a asp-controller="AdminAttributes" asp-action="EditAttributeValue" asp-route-id="0" asp-route-idOffer="@ViewBag.IDOffer" asp-route-idAttribute="@ViewBag.Attributes[i].ID">
                                         Add
                                     </a>
                                 </button>
@@ -45,11 +45,11 @@
                                 
 
                                 <button class="btn btn-warning">
-                                    <a asp-controller="Admin" asp-action="EditAttributeValue" asp-route-id="@Model[j].ID" asp-route-idOffer="@ViewBag.IDOffer" asp-route-idAttribute="@ViewBag.Attributes[i].ID">Edit</a>
+                                    <a  asp-controller="AdminAttributes" asp-action="EditAttributeValue" asp-route-id="@Model[j].ID" asp-route-idOffer="@ViewBag.IDOffer" asp-route-idAttribute="@ViewBag.Attributes[i].ID">Edit</a>
                                 </button>
 
                                  <button class="btn btn-danger">
-                                <a asp-controller="Admin" asp-action="Delete" asp-route-id="@Model[j].ID" asp-route-idOffer="@ViewBag.IDOffer" asp-route-a="AttributeValues">
+                                <a asp-controller="Admin" asp-action="Delete" asp-route-id="@Model[j].ID" asp-route-idOffer="@ViewBag.IDOffer" asp-route-a="AttributeValues" asp-route-c="AdminAttributes" >
                                         Delte
                                     </a>
                                 </button>
@@ -60,7 +60,7 @@
                         {
                             <td>
                                 <button class="btn btn-success" >
-                                    <a asp-controller="Admin" asp-action="EditAttributeValue" asp-route-id="0" asp-route-idOffer="@ViewBag.IDOffer" asp-route-idAttribute="@ViewBag.Attributes[i].ID">
+                                    <a asp-controller="AdminAttributes" asp-action="EditAttributeValue" asp-route-id="0" asp-route-idOffer="@ViewBag.IDOffer" asp-route-idAttribute="@ViewBag.Attributes[i].ID">
                                         Add
                                     </a>
                                 </button>

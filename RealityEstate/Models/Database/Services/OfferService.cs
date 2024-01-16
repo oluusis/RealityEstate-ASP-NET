@@ -10,11 +10,13 @@
         public Context Context { get; set; }
 
         public BindingList<Offer> Offerlist { get; set; } 
+        public List<Image> Images { get; set; }
 
         public OfferService()
         {
             this.Context = new Context();
             this.Offerlist = new BindingList<Offer>(this.Context.Offers.ToList());
+            this.Images = this.Context.Images.ToList();
 
             for (int i = 0; i < Offerlist.Count; i++)
             {
@@ -24,6 +26,7 @@
                 tmp.Category = GetCategory(tmp.IDCategory);
                 tmp.Images = GetImages(tmp.ID);
                 tmp.Demands = GetDemands(tmp.ID);
+                //dodělat
             }
         }
 

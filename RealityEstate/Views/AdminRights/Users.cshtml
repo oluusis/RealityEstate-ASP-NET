@@ -7,7 +7,7 @@
 
    
         <button class="btn btn-success">
-             <a asp-controller="Admin" asp-action="EditUser" asp-route-id="0">Create</a>
+             <a asp-controller="AdminRights" asp-action="EditUser" asp-route-id="0">Create</a>
         </button>
   
 
@@ -39,16 +39,12 @@
                 <td>@item.Password</td>
 
                  <td>
-                     <button class="btn btn-secondary"> 
-                         <a asp-controller="Admin" asp-action="Detail" asp-route-id="@item.ID" class="btn-link-clear">Read</a>
-                     </button>
-
                      <button class="btn btn-warning">
-                        <a asp-controller="Admin" asp-action="EditUser" asp-route-id="@item.ID" class="btn-link-clear">Edit</a>
+                        <a asp-controller="AdminRights" asp-action="EditUser" asp-route-id="@item.ID" class="btn-link-clear">Edit</a>
                      </button>
 
                      <button class="btn btn-danger">
-                        <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Users"  class="btn-link-clear">Delete</a>
+                        <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Users" asp-route-c="AdminRights" class="btn-link-clear">Delete</a>
                      </button>
                 </td>
             </tr>

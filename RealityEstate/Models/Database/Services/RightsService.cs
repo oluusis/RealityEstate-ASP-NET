@@ -44,7 +44,6 @@ namespace RealityEstate.Models.Database.Services
             }
         }
 
-
         public AdminSeller Find(int id)
         {
             return this.Context.AdminSellers.Find(id);
