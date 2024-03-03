@@ -12,13 +12,16 @@ namespace RealityEstate.Controllers
 
         public CatalogController()
         {
+
             this.offerService = new OfferService();
         }
+
 
         public IActionResult Index(Filter filter)
         {
             List<Offer> offers = new List<Offer>();
             offers = GetFilteredOffers(filter);
+
 
             this.ViewBag.ShowNumber = filter.ListingStart;
             this.ViewBag.Categories = offerService.Context.Categories.ToList();   
@@ -27,8 +30,6 @@ namespace RealityEstate.Controllers
             this.ViewBag.ShowedTypes = offerService.GetAll();
             return View(filter);
         }
-
-
 
        public List<Offer> GetFilteredOffers(Filter filter)
        {
@@ -39,10 +40,12 @@ namespace RealityEstate.Controllers
                 list = list.Where(x => x.Size == filter.Size).ToList();
             }
 
+
             if (!string.IsNullOrWhiteSpace(filter.Type))
             {
                 list = list.Where(x => x.Type == filter.Type).ToList();
             }
+
 
             if (!string.IsNullOrWhiteSpace(filter.Region))
             {
