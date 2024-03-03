@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealityEstate.Models.Rights
 {
@@ -7,12 +8,7 @@ namespace RealityEstate.Models.Rights
     {
         public int ID { get; set; }
 
-        public string ImagePath { get; set; }
-
-        /// <summary>
-        /// ///////jinej nazev
-        /// </summary>
-
+        public string? ImagePath { get; set; }
         
         public bool Type { get; set; }
      
@@ -33,6 +29,8 @@ namespace RealityEstate.Models.Rights
         [PasswordPropertyText]
         public string Password { get; set; }
 
+        [NotMapped]
+        public IFormFile? Image { get; set; }
 
         public string GetFullName
         {

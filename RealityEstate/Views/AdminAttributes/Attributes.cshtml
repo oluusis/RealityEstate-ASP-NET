@@ -1,0 +1,39 @@
+﻿@using RealityEstate.Models.Entities;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+      <button class="btn btn-success">
+             <a asp-controller="AdminAttributes" asp-action="EditAttribute" asp-route-id="0">Create</a>
+      </button>
+
+      <table class="table table-striped">
+         <thead>
+           <tr>
+               <th>#</th>
+               <th>Name</th>
+               <th>Action</th>
+           </tr>
+
+         </thead> 
+
+            <tbody>
+                @foreach (var item in ViewBag.Attributes)
+                 {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Name</td>
+                    <td>
+                      <button class="btn btn-warning">
+                        <a asp-controller="AdminAttributes" asp-action="EditAttribute" asp-route-id="@item.ID" class="btn-link-clear">Edit</a>
+                     </button>
+
+                     <button class="btn btn-danger">
+                        <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Attributes" asp-route-c="AdminAttributes" class="btn-link-clear">Delete</a>
+                     </button>
+                     
+                    </td>
+                </tr>
+                 }
+            </tbody>
+      </table>

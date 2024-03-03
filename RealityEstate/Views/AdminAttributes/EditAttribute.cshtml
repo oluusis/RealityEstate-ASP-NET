@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model RealityEstate.Models.Entities.Attribute;
+
+<form asp-controller="AdminAttributes" asp-action="EditAttribute">
+
+          <div>
+              <label asp-for="Name"></label>
+              <input asp-for="Name">
+          </div>
+          <span asp-validation-for="Name" class="xinvalid-feedback"></span>
+
+          <input type="hidden" asp-for="ID" />
+
+            <div>
+                <button type="submit" class="btn btn-info">Ok</button>
+                <button class="btn btn-danger">
+                    <a asp-controller="AdminAttributes" asp-action="Attributes">
+                          Cancel
+                    </a>
+                  
+                </button>
+            </div>
+</form>  

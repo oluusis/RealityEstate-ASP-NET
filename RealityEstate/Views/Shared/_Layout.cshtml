@@ -4,9 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - RealityEstate</title>
+
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
     @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+
 
 </head>
 <body>
@@ -16,6 +18,19 @@
                 <img src="/podklady\icon1.png" alt="">
                 <p><a href="mailto:info@realintense.org">info@realintense.org</a></p>
             </div>
+
+            @if(ViewBag.Login != null)
+            {
+                @if(this.ViewBag.Admin == null)
+                {
+                    <h3>Hello user @ViewBag.User.Name!</h3>
+                }
+                else
+                {
+                    <h3>Hello admin @ViewBag.Admin.Name!</h3>
+                }
+                  
+            }
 
             <div class="icon">
                 <img src="/podklady\icon2.png" alt="">
@@ -31,8 +46,18 @@
 
             <div class="header-sources">
                 <h4><a asp-controller="Home" asp-action="Index">HOME</a></h4>
-                <h4><a href="xxx">KONTAKT</a></h4>
                 <h4><a asp-controller="Catalog" asp-action="Index" >KATALOG</a></h4>
+
+                <h4>
+                @if(ViewBag.Login == null)
+                {
+                    <a asp-controller="Login" asp-action="Index" asp-route-c="Home" asp-route-a="@ViewContext.RouteData.Values["action"]">LOG IN</a>
+                }
+                else
+                {
+                    <a asp-controller="Login" asp-action="Logout" asp-route-a="@ViewContext.RouteData.Values["action"]">LOG OUT</a>             
+                }
+                </h4>
             </div>
         </div>
 
@@ -79,9 +104,10 @@
 
         <p>Copyright 2016 - Real estate</p>
     </footer>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,87 @@
+﻿@using RealityEstate.Models.Entities;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+   
+        <button class="btn btn-success">
+             <a asp-controller="Admin" asp-action="EditOffer" asp-route-id="0">Create</a>
+        </button>
+  
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Actions</th>
+            <th>Category name</th>
+            <th>Seller name</th>
+            <th>Price</th>
+            <th>Short info</th>
+            <th>Size</th>
+            <th>Region</th>
+            <th>Address</th>
+            <th>Energ. class</th>
+            <th>Long info</th>
+            <th>Type</th>
+            <th>Showed</th>
+        </tr>
+       
+    </thead>
+
+
+    <tbody>
+        @foreach (Offer item in ViewBag.Offers)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Name</td>
+
+                <td>
+                     <button class="btn btn-secondary"> 
+                         <a asp-controller="Detail" asp-action="Index" asp-route-id="@item.ID" asp-route-fromAdmin="true" class="btn-link-clear">Read</a>
+                     </button>
+
+                     <button class="btn btn-warning">
+                        <a asp-controller="Admin" asp-action="EditOffer" asp-route-id="@item.ID" class="btn-">Edit</a>
+                     </button>
+
+                     <button class="btn btn-danger">
+                        <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.ID" asp-route-a="Offers" class="btn-link-clear">Delete</a>
+                     </button>
+                </td>
+
+              
+                <td>@item.Category.Name</td>
+                <td>@item.AdminSeller.Name</td>
+                <td>@item.Price</td>
+
+                @if(@item.ShortInfo.Length > 10){
+                    <td>@item.ShortInfo.Substring(0,9)...</td>
+                }
+                else{
+                    <td>@item.ShortInfo</td>
+                }
+                <td>@item.Size</td>
+                <td>@item.Region</td>
+                <td>@item.Address</td>
+                <td>@item.EnergeticClass</td>
+
+                @if(@item.BigInfo.Length > 10){
+                    <td>@item.BigInfo.Substring(0,9)...</td>
+                }
+                else{
+                    <td>@item.BigInfo</td>
+                }
+
+                <td>@item.Type</td>     
+                <td>@item.Showed</td>
+            </tr>
+        }
+    </tbody>
+</table>

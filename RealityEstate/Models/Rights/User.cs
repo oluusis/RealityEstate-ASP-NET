@@ -10,8 +10,6 @@ namespace RealityEstate.Models.Rights
 
         public string Name { get; set; }
 
-        public string Surname { get; set; }
-
         [EmailAddress]
         public string Email { get; set; }
 
@@ -23,6 +21,6 @@ namespace RealityEstate.Models.Rights
         [PasswordPropertyText]
         public string Password { get; set; }
 
-        public List<Demand> Demands { get; set; }
+        public List<Demand>? Demands { get; set; }
     }
 }

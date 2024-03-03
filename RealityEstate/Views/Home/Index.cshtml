@@ -32,7 +32,7 @@
 
         <div>
             <div>
-                <h1>Naše nabídka</h1>
+                <h1>Top nabídka</h1>
             </div>
 
             <div class="under-line">
@@ -50,9 +50,9 @@
         </div>
 
 
-        <vc:ListingBtns-component number="@ViewBag.ShowNumber" offercount="ViewBag.ShowedOffers.Count"></vc:ListingBtns-component>
 
-        @*
+        @*<vc:ListingBtns-component number="@ViewBag.ShowNumber" offercount="ViewBag.ShowedOffers.Count"></vc:ListingBtns-component>*@
+
              <div class="findAll">
             @if (ViewBag.ShowNumber < this.ViewBag.ShowedOffers.Count-1)
             {
@@ -73,9 +73,8 @@
                 </a>
             }  
         </div>
-        *@
-       
 
+        
         <a class="findAll" asp-controller="Catalog" asp-action="Index">
             <button class="search-button">Zobrazit vše</button>
         </a>

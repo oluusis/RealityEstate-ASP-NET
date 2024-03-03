@@ -1,5 +1,65 @@
-﻿
-<div class="content">
+﻿@using RealityEstate.Models.Entities;
+@model Filter;
+
+<div class="content">   
+
+    <div id="filters">
+        <h1>Filter</h1>
+        <form asp-action="Index">
+            <div id="filter-search" class="search-input">
+                <input type="text" asp-for="Region" placeholder="Vyhledávání podle města...">
+            </div>
+
+            <div>
+                <div>
+                     <select asp-for="IDCategory" >
+                    <option value=""> --Select Category-- </option>
+                    @foreach (Category item in ViewBag.Categories)
+                    {
+                        <option value="@item.ID">@item.Name</option>
+                    }
+                    </select>
+                </div>
+               
+            </div>
+
+            <div>
+                <div>
+                    <label asp-for="MinPrice"></label>
+                    <input asp-for="MinPrice" min="0">
+                </div>
+
+                <div>
+                    <label asp-for="MaxPrice"></label>
+                    @*<input type="range" asp-for="MaxPrice" min="0" max="@Model.MaxPriceSet"/>*@
+                    <input asp-for="MaxPrice" min="0" />
+                </div>
+            </div>
+            
+            <div>
+                <select asp-for="Type">
+                    <option value=""> --Select type-- </option>
+                    @foreach (Offer item in ViewBag.ShowedTypes)
+                    {
+                        <option value="@item.Type">@item.Type</option>
+                    }
+                </select>
+            </div>
+           
+           <div>
+               <div>
+                 <label asp-for="Size"></label>
+                  <input asp-for="Size" /> 
+                </div>   
+
+                <div>
+                    <button class="search-button" type="submit">HLEDAT</button>
+                 </div>
+           </div>
+            
+        </form>
+    </div>
+
     <div class="offer">
 
         @for (int i = 0; i < @ViewBag.ShowedOffers.Count; i++)

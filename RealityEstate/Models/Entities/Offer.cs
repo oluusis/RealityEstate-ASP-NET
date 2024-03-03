@@ -24,7 +24,15 @@ namespace RealityEstate.Models.Entities
 
         public int Size { get; set; }   
 
+        public string Region { get; set; }
+
         public string Address { get; set; }
+
+        public string GetFullAddress {
+            get
+            {
+                return this.Region + ", " + this.Address;
+            }}  
 
         public char EnergeticClass { get; set; }
 
@@ -32,14 +40,19 @@ namespace RealityEstate.Models.Entities
 
         public string Type { get; set; }
 
-        public Category Category { get; set; }
+        public bool Showed { get; set; }    
 
-        public AdminSeller AdminSeller { get; set; }
+        public Category? Category { get; set; }
 
-        public List<AttributeValue> Attributes { get; set; }
+        public AdminSeller? AdminSeller { get; set; }
 
-        public List<Image> Images { get; set; }
+        public List<AttributeValue>? Attributes { get; set; }
 
-        public List<Demand> Demands { get; set; }   
+        public List<Image>? Images { get; set; }
+
+        public List<Demand>? Demands { get; set; }
+
+        [NotMapped]
+        public List<IFormFile>? Image { get; set; }
     }
 }

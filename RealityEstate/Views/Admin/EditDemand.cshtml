@@ -1,0 +1,61 @@
+﻿@using RealityEstate.Models.Entities;
+@using RealityEstate.Models.Rights;
+
+@model Demand;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<form asp-controller="Admin" asp-action="EditDemand" class="forms">
+
+          <div>
+              <label asp-for="Name"></label>
+            <input asp-for="Name">
+          </div>
+          <span asp-validation-for="Name" class="xinvalid-feedback"></span>
+
+          <div>
+              <label asp-for="Tel"></label>
+              <input asp-for="Tel">
+              <span asp-validation-for="Tel" class="xinvalid-feedback"></span>
+          </div>
+            
+          <div>
+                <label asp-for="Email"></label>
+               <input asp-for="Email">
+                <span asp-validation-for="Email" class="xinvalid-feedback"></span>
+          </div>
+
+          <div class="fullwidth">
+              <label asp-for="Message"></label>
+            <textarea asp-for="Message" cols="30" rows="10" placeholder="..."></textarea>          
+          </div>
+          <span asp-validation-for="Message" class="xinvalid-feedback"></span>   
+
+
+            <label asp-for="IDOffer"></label>
+            <select asp-for="IDOffer" asp-items="@(new SelectList(ViewBag.Offers, "ID", "Name"))">
+                <option value=""> - </option>
+            </select>
+
+       
+
+            <label asp-for="IDUser"></label>
+             <select asp-for="IDUser" asp-items="@(new SelectList(ViewBag.Users, "ID", "Name"))">
+                <option value=""> - </option>
+            </select>
+
+      
+
+           <div>
+                <button type="submit" class="btn btn-info">Ok</button>
+                <button class="btn btn-danger">
+                    <a asp-controller="Admin" asp-action="Demands">
+                          Cancel
+                    </a>
+                  
+                </button>
+            </div>
+    </form>  

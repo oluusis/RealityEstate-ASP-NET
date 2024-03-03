@@ -2,14 +2,21 @@
 @model Offer;
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "Detail"; 
 }
 
 
+
 <main>
+    @if (ViewBag.ShowAlert != null && ViewBag.ShowAlert)
+    {
+    <script type='text/javascript'>
+        alert('Demand sent!');
+    </script>
+    }
+
   <div class="main-info">
-  
-      @if(Model.Images.Count != 0)
+    @if(Model.Images.Count != 0)
         {
             <img src="@Model.Images[0].Path">
 
@@ -20,13 +27,24 @@
                     <a class="images-items" href="">
                         <img  src="@Model.Images[i].Path">
                     </a>
+
+                    @if(Model.Images.Count-1 == 5)
+                    {
+                        <div id="lastImg" class="images-items" href="">
+                            <img  src="@Model.Images[i].Path">
+                            <div class="centered">
+                                <h3>Dalších @(Model.Images.Count-6)</h3>
+                                <h3>fotek</h3>
+                            </div>
+                        </div>
+                    }
                 }
-      
+                @*
                  <div id="lastImg" class="images-items">
                     <h3>Dalších 23</h3>
                     <h3>fotek</h3>
                 </div>
-      
+                *@
             </div>
         }
         else
@@ -37,13 +55,13 @@
 
     <div class="info">
       <div>
-        <h2>@Model.Name</h2>
-        <p class="no-pc">@Model.Address</p>
+        <h2>@Model.Name, @Model.Size m<sup>2</sup></h2>
+        <p class="no-pc">@Model.GetFullAddress</p>
         <h1>@Model.Price,- / měsíc</h1>
       </div>
 
       <div class="under-info">
-        <p class="no-mobile">@Model.Address</p>
+        <p class="no-mobile">@Model.GetFullAddress</p>
         <p>za nemovitost</p>
       </div>
 
@@ -64,34 +82,38 @@
     <div class="text">
       <p>
         @Model.BigInfo
-        </div>
+       
       </p>
     </div>
 
     <div class="two-tables">
+        
+      @if(Model.Attributes.Count != 0)
+      {
       <table class="tb-two-stripped">
           <tbody>
-             @for (int i = 0; i < (ViewBag.Attributes.Count/2)+1; i++)
+             @for (int i = 0; i < (Model.Attributes.Count/2)+1; i++)
              {
                 <th>
-                    <div>@ViewBag.Attributes[i].Name</div>
+                    <div>@Model.Attributes[i].Attribute.Name</div>
 
-                    <div>@Model.Attributes.FirstOrDefault(x => x.IDAttribute == @ViewBag.Attributes[i].ID)?.Value</div>
+                    <div>@Model.Attributes[i].Value</div>
            
                 </th>     
              }
 
-        </tbody> 
-      </table>
+           </tbody> 
+      </table>  
+      
 
-      <table class="tb-two-stripped">
+       <table class="tb-two-stripped">
         <tbody>
-         @for (int i = (ViewBag.Attributes.Count/2)+1; i < ViewBag.Attributes.Count; i++)
+         @for (int i = (Model.Attributes.Count/2)+1; i < Model.Attributes.Count; i++)
              {
                 <th>
-                    <div>@ViewBag.Attributes[i].Name</div>
+                    <div>@Model.Attributes[i].Attribute.Name</div>
 
-                    <div>@Model.Attributes.FirstOrDefault(x => x.IDAttribute == @ViewBag.Attributes[i].ID)?.Value</div>
+                    <div>@Model.Attributes[i].Value</div>
            
                 </th>     
              }
@@ -99,20 +121,22 @@
                 @if (ViewBag.Attributes.Count % 2 != 0)
                 {
                     <th>
-                        <div>X</div>
+                        <div class="transparent">X</div>
                         <div></div>
                     </th>
                 }
             </tbody>
       </table>
+      }
     </div>
+     
 
     <div class="seler">
       <div>
         <h2>Kontaktujte prodejce</h2>
 
         <div>
-          <div>
+          <div class="rounded-circle">
             <img src="@Model.AdminSeller.ImagePath">
           </div>
           
@@ -147,27 +171,11 @@
       </div>
       
     
-
       <div>
-        <h2>Napište nám, ozveme se</h2>
-        <form action="messageRequest">
-          <div class="fullwidth">
-            <input type="text" placeholder="Vaše jméno a příjmení">
-          </div>
-          <div id="middle-form">
-            <input type="tel" placeholder="Telefon">
-            <input type="email" placeholder="E-mail">
-          </div>
-          <div class="fullwidth">
-            <textarea value="message" name="" id="" cols="30" rows="10" placeholder="Napište nám zprávu..."></textarea>
-          </div>
-          <div class="button-center">
-            <button class="search-button" type="submit">Odeslat poptávku</button>
-          </div>
-        </form>
+        <vc:demand-component demand="@ViewBag.Demand"></vc:demand-component>
       </div>
-    </div>   
-      
+    </div> 
+  </div>
   </div>
 </main>
 

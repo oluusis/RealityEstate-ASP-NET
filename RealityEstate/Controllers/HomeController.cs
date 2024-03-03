@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealityEstate.Controllers.AuthorizingClasses;
 using RealityEstate.Models;
 using RealityEstate.Models.Database.Services;
 using RealityEstate.Models.Entities;
@@ -6,7 +7,7 @@ using System.Diagnostics;
 
 namespace RealityEstate.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private OfferService offerService;
@@ -15,24 +16,20 @@ namespace RealityEstate.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            this.offerService = OfferService.Instance;
+            this.offerService = new OfferService();
             this.categoryService = new CategoryService();
         }
 
-        public IActionResult Index(bool showAll = true, int number = 0) //, BindingList<Offer>? offers = null)
+        public IActionResult Index(bool showAll = true, int number = 0) 
         {
             this.ViewBag.Categories = this.categoryService.CategoryList;
             this.ViewBag.ShowNumber =  number;
 
             if (showAll)
             {
-                this.ViewBag.ShowedOffers = this.offerService.Offerlist;
+                this.ViewBag.ShowedOffers = this.offerService.Offerlist.Where(x => x.Showed == true).ToList();
             }
-            //else
-            //{
-            //    this.ViewBag.ShowedOffers = offers;
-            //}
-          
+
             return View();
         }
 
@@ -45,8 +42,6 @@ namespace RealityEstate.Controllers
         {
             return RedirectToAction("Index", "Catalog", new Filter { Region = Request.Form["RegionName"] });
         }
-
-
 
         public IActionResult Price()
         {

@@ -1,0 +1,108 @@
+﻿@using RealityEstate.Models.Entities;
+@model Offer
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form asp-controller="Admin" asp-action="EditOffer" enctype="multipart/form-data" class="forms">
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name">
+        <span asp-validation-for="Name" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="Price"></label>
+        <input asp-for="Price">
+        <span asp-validation-for="Price" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="ShortInfo"></label>
+        <input asp-for="ShortInfo">
+        <span asp-validation-for="ShortInfo" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="Size"></label>
+        <input asp-for="Size">
+        <span asp-validation-for="Size" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="Region"></label>
+        <input asp-for="Region">
+        <span asp-validation-for="Region" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address">
+        <span asp-validation-for="Address" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="EnergeticClass"></label>
+        <input asp-for="EnergeticClass">
+        <span asp-validation-for="EnergeticClass" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="BigInfo"></label>
+        <textarea asp-for="BigInfo" cols="30" rows="10" placeholder="..."></textarea>
+        <span asp-validation-for="BigInfo" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="Type"></label>
+        <input asp-for="Type">
+        <span asp-validation-for="Type" class="xinvalid-feedback"></span>
+    </div>
+
+    <div>
+        <label asp-for="Showed"></label>
+        <input asp-for="Showed">
+        <span asp-validation-for="Showed" class="xinvalid-feedback"></span>
+    </div>
+
+
+    <button class="btn btn-info">
+        <a asp-controller="AdminAttributes" asp-action="AttributeValues" asp-route-idOffer="@Model.ID">
+            Attributes
+        </a>
+    </button>
+
+    <label asp-for="IDCategory"></label>
+    <select asp-for="IDCategory" asp-items="@(new SelectList(ViewBag.Categories, "ID", "Name"))">
+        <option value=""> - </option>
+    </select>
+
+    <label asp-for="IDAdminSeller"></label>
+    <select asp-for="IDAdminSeller" asp-items="@(new SelectList(ViewBag.Sellers, "ID", "Name"))">
+        <option value=""> - </option>
+    </select>
+
+    <div id="fileInputsContainer"> 
+        <div>
+            <label asp-for="Image">Upload Image:</label>
+            <input asp-for="Image" name="Image" multiple class="formfile" />
+        </div>
+   </div>
+
+
+
+    <button type="button" id="addImageButton" class="btn btn-success">Add Image</button>
+
+       <br />
+
+    <div>
+        <button type="submit" class="btn btn-info">Ok</button>
+        <button class="btn btn-danger">
+            <a asp-controller="Admin" asp-action="Offers">
+                Cancel
+            </a>
+        </button>
+    </div>
+</form>

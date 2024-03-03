@@ -1,0 +1,69 @@
+﻿@using RealityEstate.Models.Entities;
+
+@model Demand;
+
+<h2>Napište nám, ozveme se</h2>
+<form class="messageRequest" asp-controller="Detail" asp-action="Index" method="post">
+          <div class="fullwidth">
+                @if (ViewBag.User != null)
+                {
+                     <input asp-for="Name" placeholder="Vaše jméno a příjmení" value="@ViewBag.User.Name">
+                }
+                else
+                {
+                    <input asp-for="Name" placeholder="Vaše jméno a příjmení">
+                }
+       
+          </div>
+          <span asp-validation-for="Name" class="xinvalid-feedback"></span>
+
+          <div id="middle-form">
+              <div>
+                  
+                    @if (ViewBag.User != null)
+                    {
+                        <input asp-for="Tel" placeholder="Telefon" value="@ViewBag.User.Tel">
+                    }
+                    else
+                    {
+                        <input asp-for="Tel" placeholder="Telefon">
+                    }
+                    <span asp-validation-for="Tel" class="xinvalid-feedback"></span>
+          
+              </div>
+            
+              <div>
+                    @if (ViewBag.User != null)
+                    {
+                         <input asp-for="Email" placeholder="E-mail" value="@ViewBag.User.Email">
+                    }
+                    else
+                    {
+                        <input asp-for="Email" placeholder="E-mail">
+                    }
+           
+                    <span asp-validation-for="Email" class="xinvalid-feedback"></span>
+              </div> 
+          </div>
+          <div class="fullwidth">
+            <textarea asp-for="Message" cols="30" rows="10" placeholder="Napište nám zprávu..."></textarea>          
+          </div>
+          @**@<span asp-validation-for="Message" class="xinvalid-feedback"></span>
+
+          <div class="button-center">
+            <button class="search-button" type="submit">Odeslat poptávku</button>
+          </div>     
+
+          <input type="hidden" asp-for="IDOffer" />
+
+          @if(ViewBag.User != null){
+            <input type="hidden" asp-for="IDUser"/>
+            @*<input type="hidden" asp-for="User" value="@ViewBag.User"/>*@
+          }
+          else
+          {
+            <input type="hidden" asp-for="IDUser" />
+          }
+          <input type="hidden" asp-for="ID" value="0" />
+    
+</form>    
