@@ -6,3 +6,8 @@ he site allows sellers to post their properties, including key details like the 
 The underlying database employs a many-to-many (m:n) relationship to handle the complex associations between users, offers, and property attributes. Additionally, 
 there's an admin section where authenticated administrators can manage all users, oversee demands and offers, and adjust system parameters as needed. This comprehensive approach ensures smooth operation and a great user experience.
 
+
+![Uploading image.png…]()
+
+![Uploading image.png…]()
+
