@@ -1,4 +1,4 @@
- Description
+Description
 
 My final school project was an ASP.NET-based real estate website designed to connect buyers and sellers in a dynamic and interactive way. 
 Users can explore a variety of real estate offers, with the ability to react to listings they find interesting, making it easier to gauge popularity and demand. T
