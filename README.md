@@ -7,7 +7,7 @@ The underlying database employs a many-to-many (m:n) relationship to handle the 
 there's an admin section where authenticated administrators can manage all users, oversee demands and offers, and adjust system parameters as needed. This comprehensive approach ensures smooth operation and a great user experience.
 
 
-![Uploading image.png…]()
+![image](https://github.com/oluusis/RealityEstate-ASP-NET/assets/90570377/07d62adb-8f90-4e84-bd99-b9169161320d)
 
-![Uploading image.png…]()
+![image](https://github.com/oluusis/RealityEstate-ASP-NET/assets/90570377/91491f78-e87c-4fca-9e54-68e903e01a58)
 
